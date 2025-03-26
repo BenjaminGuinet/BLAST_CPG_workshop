@@ -137,44 +137,6 @@ mmseqs convertalis --format-output "query,target,pident,alnlen,mismatch,gapopen,
 | LC371381.1 | C9JSJ3     | 46.300   | 1686             | 304        | 0            | 37          | 1722      | 64            | 630        | 9.136E-146 | 476      | 638            | 0.889          | 0.953          | 9606    | Homo sapiens | -_cellular organisms;d_Eukaryota;-_Opisthokonta;k_Metazoa;-_Eumetazoa;-_Bilateria;-_Deuterostomia;p_Chordata;-_Craniata;-_Vertebrata;-_Gnathostomata;-_Teleostomi;-_Euteleostomi;-_Sarcopterygii;-_Dipnotetrapodomorpha;-_Tetrapoda;-_Amniota;c_Mammalia;-_Theria;-_Eutheria;-_Boreoeutheria;-_Euarchontoglires;o_Primates;-_Haplorrhini;-_Simiiformes;-_Catarrhini;-_Hominoidea;f_Hominidae;-_Homininae;g_Homo;s_Homo sapiens |
 
 
-
-we need to format our sequence file into an MMseqs2 database:
-
-```bash
-mmseqs createdb example.fasta exampleDB
-```
-
-## Running a Sequence Search
-
-To search a query sequence against the database:
-
-```bash
-mmseqs search query.fasta exampleDB resultDB tmp
-mmseqs convertalis query.fasta exampleDB resultDB result.tsv
-```
-
-This will generate a results file (`result.tsv`) containing hits.
-
-## Interpreting Results in R
-
-We can analyze the results in R:
-
-```{r}
-library(tidyverse)
-
-# Load results
-df <- read_tsv("result.tsv", col_names = c("query", "target", "evalue", "bit_score"))
-
-# Inspect the top hits
-head(df)
-
-# Plot bit score distribution
-ggplot(df, aes(x = bit_score)) +
-  geom_histogram(binwidth = 5, fill = "blue", alpha = 0.7) +
-  theme_minimal() +
-  labs(title = "Distribution of Bit Scores", x = "Bit Score", y = "Count")
-```
-
 ## Conclusion
 
-MMseqs2 is a powerful alternative to BLAST that allows rapid sequence similarity searches. This workshop demonstrated how to set up MMseqs2, create a database, perform searches, and analyze results using R.
+MMseqs2 is a powerful alternative to BLAST that allows rapid sequence similarity searches. 
