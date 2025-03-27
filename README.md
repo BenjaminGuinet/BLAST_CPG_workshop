@@ -1,13 +1,3 @@
----
-title: "BLAST Search with MMseqs2"
-author: "Your Name"
-date: "`r Sys.Date()`"
-output: html_document
----
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
 
 ## Introduction
 
